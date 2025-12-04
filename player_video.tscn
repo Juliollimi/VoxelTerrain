@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpl2vw6gkjrxb"]
+
+[ext_resource type="Script" uid="uid://b4tpsrsdf7d1g" path="res://player.gd" id="1_3uiso"]
+[ext_resource type="Script" uid="uid://dqx4mqyncpb6j" path="res://Raycast.gd" id="1_xxji0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3uiso"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_17yoy"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_3uiso")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3uiso")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_17yoy")
+
+[node name="camera_pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17383963, 0)
+
+[node name="Camera3D" type="Camera3D" parent="camera_pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.45215505)
+
+[node name="VoxelViewer" type="VoxelViewer" parent="camera_pivot/Camera3D"]
+
+[node name="RayCast3D" type="RayCast3D" parent="camera_pivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.0070685316, -0.999975, 0, 0.999975, 0.0070685316, 0, 0, -0.040603638)
+target_position = Vector3(0, -1.755, 0)
+script = ExtResource("1_xxji0")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://dn37er1ywxj2y"]
+
+[ext_resource type="PackedScene" uid="uid://0dtt3i5legrd" path="res://player.tscn" id="1_a202f"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4xowi"]
+
+[sub_resource type="VoxelGeneratorNoise2D" id="VoxelGeneratorNoise2D_a202f"]
+noise = SubResource("FastNoiseLite_4xowi")
+channel = 0
+height_start = -10.0
+height_range = 30.0
+
+[sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_noarx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_r3fl7"]
+material_override_0 = SubResource("StandardMaterial3D_a0tk4")
+
+[sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_jka67"]
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_noarx"), SubResource("VoxelBlockyModelCube_r3fl7")])
+
+[sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_i5arm"]
+library = SubResource("VoxelBlockyLibrary_jka67")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.057250336, 0.99835986, 0, -0.99835986, -0.057250336, 0, 0, 0)
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="."]
+generator = SubResource("VoxelGeneratorNoise2D_a202f")
+mesher = SubResource("VoxelMesherBlocky_i5arm")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28, 0)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_a202f")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -21.995445, 0)
